@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Inter', sans-serif;
+
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+
+    /* Explicitly map Tailwind colors to CSS variables */
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+
+    --color-border: var(--border);
+
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+
+    --color-secondary: var(--secondary);
+
+    /* Add gradient utilities if needed via variables or standard tailwind classes */
+}
+
+@layer base {
+    :root {
+        color-scheme: light;
+
+        /* Light Mode - Soft & Premium */
+        /* Using a subtle gradient instead of pure white */
+        --background: #f8fafc;
+        /* Slate-50-ish fallback */
+        --foreground: #1e293b;
+        /* Slate-800 */
+
+        --accent: #ffffff;
+        --accent-hover: #f1f5f9;
+        /* Slate-100 */
+
+        --border: #e2e8f0;
+        /* Slate-200 */
+
+        /* Food Panda Pink - Adjusted for better contrast on off-white */
+        --primary: #D70F64;
+        --primary-hover: #b90d56;
+
+        --secondary: #64748b;
+        /* Slate-500 */
+    }
+
+    .dark {
+        color-scheme: dark;
+
+        /* Dark Mode - Deep & Rich Gradient */
+        --background: #0a0a0a;
+        --foreground: #ededed;
+
+        --accent: #171717;
+        /* Neutral-900 */
+        --accent-hover: #262626;
+        /* Neutral-800 */
+
+        --border: #262626;
+        /* Neutral-800 */
+
+        /* Vercel Blue */
+        --primary: #0070f3;
+        --primary-hover: #0060df;
+
+        --secondary: #a1a1aa;
+        /* Zinc-400 */
+    }
+
+    body {
+        /* Apply the gradient background here */
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+
+    /* 
+     We can override the background for specific modes to have a gradient 
+     while keeping the variable solid for other uses if needed.
+  */
+    :root body {
+        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        /* Soft cloud gradient */
+    }
+
+    .dark body {
+        background: linear-gradient(to bottom right, #0a0a0a, #111111);
+        /* Subtle deep dark gradient */
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary);
+}
+
+.leaflet-container {
+    z-index: 0;
+}

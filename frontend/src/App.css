@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Poppins", sans-serif;
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+    --color-destructive: hsl(var(--destructive));
+    --color-destructive-foreground: hsl(var(--destructive-foreground));
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+}
+
+/* Shadcn/Tailwind Variables */
+:root {
+    /* Professional Soft Theme (Calm & Modern) */
+    /* User Requested: Clean, Modern, Calm (Teal Dashboard Theme) */
+    /* #F7F9FB = hsl(210, 25%, 98%) */
+    --background: 210 25% 98%;
+    /* #2E2E2E = hsl(0, 0%, 18%) */
+    --foreground: 0 0% 18%;
+
+    /* #FFFFFF = hsl(0, 0%, 100%) */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 18%;
+
+    /* #2BB0A6 (Soft Teal) = hsl(176, 60%, 43%) */
+    --primary: 176 60% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    /* #F7F9FB */
+    --secondary: 210 25% 98%;
+    --secondary-foreground: 0 0% 18%;
+
+    /* #F7F9FB */
+    --muted: 210 25% 98%;
+    /* #6B7280 = hsl(220, 13%, 46%) */
+    --muted-foreground: 220 13% 46%;
+
+    /* Light Teal Accent */
+    --accent: 176 60% 96%;
+    --accent-foreground: 176 60% 43%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 15% 92%;
+    /* Soft Slate border */
+    --input: 210 15% 92%;
+    --ring: 175 60% 40%;
+    /* Teal focus ring */
+    --radius: 0.75rem;
+
+    /* Customer App Vars (Legacy) - Renamed to avoid collision if possible, but keeping for compatibility */
+    /* Customer App Vars - Mapping to new Primary */
+    --customer-primary: hsl(var(--primary));
+    --customer-bg: #f8f9fa;
+    --customer-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* User Requested: Soft Gray + Teal (Best for Rider UI) */
+.rider-theme {
+    /* Background: Soft Light Gray #F6F8FA -> 210 20% 97% */
+    --background: 210 20% 97%;
+
+    /* Cards: Soft White #FFFFFF -> 0 0% 100% */
+    --card: 0 0% 100%;
+
+    /* Primary Text: Charcoal Gray #2D2D2D -> 0 0% 18% */
+    --foreground: 0 0% 18%;
+
+    /* Secondary Text: Cool Gray #6B7280 -> 220 9% 46% */
+    --muted-foreground: 220 9% 46%;
+
+    /* Primary Action: Calm Teal #2BB0A6 -> 176 60% 43% */
+    --primary: 176 60% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Borders: Light Border #E5E7EB -> 220 13% 91% */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+
+    /* Success: Muted Green #4CAF50 */
+    --success: 122 39% 49%;
+
+    /* Warning: Soft Amber #F59E0B */
+    --warning: 38 92% 50%;
+}
+
+.dark {
+    /* Softer Dark Theme (Zinc/Slate) - Better for "Premium Food App" vibe */
+    --background: 240 10% 3.9%;
+    /* Very dark grey, almost black but softer */
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 9 90% 65%;
+    /* Soft Warm Red/Orange active state */
+    --primary-foreground: 0 85% 97%;
+
+    --secondary: 240 3.7% 15.9%;
+    /* Lighter grey for sidebar/cards */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+}
+
+/* Base resets */
+* {
+    border-color: hsl(var(--border));
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Remove global background to allow Rider to control itself */
+    /* background-color: var(--customer-bg); */
+    color: var(--secondary);
+    /* This might still conflict, but check */
+}
+
+/* --- Customer App Scoped Styles --- */
+
+.customer-app {
+    background-color: var(--customer-bg);
+    min-height: 100vh;
+}
+
+/* Navigation */
+.navbar {
+    background: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    color: brown;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2d3436;
+    margin-left: 20px;
+    font-weight: 900;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--customer-primary);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border-radius: 10px;
+    padding: 10px 0;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #2E2E2E;
+    /* Dark Text */
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+    /* Override generic nav link margin */
+}
+
+.dropdown-content a:hover {
+    background-color: var(--accent);
+    /* Light Teal */
+    color: var(--customer-primary);
+    /* Teal */
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero h3 {
+    font-weight: 300;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 12px 30px;
+    background: var(--customer-primary);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: #e55050;
+}
+
+/* Menu Grid */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.menu-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2d3436;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--customer-shadow);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: var(--customer-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Cart */
+.cart-item {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.remove-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --- New Home Page Sections --- */
+
+/* Features Section */
+.features-section {
+    padding: 4rem 2rem;
+    background: #fff;
+    text-align: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+}
+
+.feature-box {
+    padding: 2rem;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--customer-primary);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 4rem 2rem;
+    background: var(--customer-bg);
+    text-align: center;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    text-align: left;
+}
+
+.quote-icon {
+    font-size: 3rem;
+    color: var(--customer-primary);
+    opacity: 0.2;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    background: #ddd;
+    /* Fallback */
+}
+
+/* Footer Styles */
+.footer-section {
+    background: #1a1a1a;
+    color: #aeaeae;
+    padding: 4rem 0 0;
+    margin-top: auto;
+    /* Push to bottom if flex container */
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #333;
+}
+
+.footer-col h3,
+.footer-col h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.footer-col p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-col ul li a {
+    color: #aeaeae;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--customer-primary);
+    padding-left: 5px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: white;
+    background: #333;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background: var(--customer-primary);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-form input {
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
+.newsletter-form button {
+    background: var(--customer-primary);
+    color: white;
+    border: none;
+    padding: 0 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    background: #111;
+    font-size: 0.85rem;
+}
+
+/* --- Admin & Auth Styles (Glassmorphism) --- */
+@layer components {
+    .glass {
+        @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+    }
+
+    .glass-dark {
+        @apply bg-slate-900/80 backdrop-blur-lg border border-slate-700/50 shadow-xl;
+    }
+
+    .input-field {
+        @apply w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-teal-200 outline-none transition-all duration-200 bg-white/50 backdrop-blur-sm;
+    }
+
+    .btn-primary {
+        @apply w-full py-3 px-6 bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-700 hover:to-teal-600 text-white font-semibold rounded-xl shadow-lg shadow-teal-500/30 transform transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0;
+    }
+}
